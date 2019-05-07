@@ -3,6 +3,7 @@ import { HacerService } from '../../services/hacer.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -33,23 +34,28 @@ async agregarLista(){
             text: 'Cancelar',
             role: 'cancel',
             handler: () => {
-              console.log('Cancelar');
+              console.log(' ');
             }
           },
           {
             text: 'Crear',
             handler: (data) => {
               console.log(data);
-              if (data.titulo.length === 0){
+              if(data.titulo.length === 0){
                 return;
               }
+              const listaId = this.hacerService.crearLista(data.titulo);
 
-              this.hacerService.crearLista(data.titulo);
+              this.router.navigateByUrl(`/tabs/tab1/agregar/${ listaId }`);
             }
           }
         ]
       });
         alert.present();
   }
+
+  listaSeleccionada(lista: Lista){
+    this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`);
+   }
 
 }
