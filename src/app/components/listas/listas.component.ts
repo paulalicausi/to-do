@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { HacerService } from '../../services/hacer.service';
 import { Lista } from '../../models/lista.model';
 import { Router } from '@angular/router';
+import { AlertController, IonList } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-listas',
@@ -10,9 +12,10 @@ import { Router } from '@angular/router';
 })
 export class ListasComponent implements OnInit {
 
+  @ViewChild(IonList) lista: IonList;
   @Input()terminada = true;
 
-  constructor(public hacerService: HacerService, private router: Router) {
+  constructor(public hacerService: HacerService, private router: Router, private alertCtrl: AlertController) {
     this.listas = this.hacerService.getLista();
 
 }
@@ -28,5 +31,42 @@ export class ListasComponent implements OnInit {
      borrarLista(lista: Lista){
        this.hacerService.borrarLista(lista);
      }
+
+     async editarLista(lista: lista){
+           const alert = await this.alertCtrl.create({
+             header: 'Editar lista',
+             inputs: [
+               {
+                 name: 'titulo',
+                 type: 'text',
+                 value: lista.titulo,
+                 placeholder: 'Nuevo titulo'
+               }
+             ],
+             buttons: [
+               {
+                 text: 'Cancelar',
+                 role: 'cancel',
+                 handler: () => {
+                   console.log(' ');
+                   this.lista.closeSlidingItems();
+                 }
+               },
+               {
+                 text: 'Modificar',
+                 handler: (data) => {
+                   console.log(data);
+                   if(data.titulo.length === 0){
+                     return;
+                   }
+                    lista.titulo = data.titulo;
+                    this.hacerService.guardarStorage();
+                    this.lista.closeSlidingItems();
+                 }
+               }
+             ]
+           });
+             alert.present();
+       }
 
      }
