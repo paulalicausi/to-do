@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input,  } from '@angular/core';
 import { HacerService } from '../../services/hacer.service';
 import { Lista } from '../../models/lista.model';
 import { Router } from '@angular/router';
