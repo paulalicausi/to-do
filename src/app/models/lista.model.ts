@@ -7,8 +7,7 @@ export class Lista {
   terminadaEn: Date;
   terminada: boolean;
   items: ListaItem[];
-
-
+  
   constructor (titulo: string) {
     this.titulo = titulo;
     this.creadaEn = new Date();

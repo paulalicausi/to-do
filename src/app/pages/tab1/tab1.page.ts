@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HacerService } from '../../services/hacer.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Lista } from 'src/app/models/lista.model';
 
 
 @Component({

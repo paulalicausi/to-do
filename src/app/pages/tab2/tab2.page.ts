@@ -7,8 +7,5 @@ import { HacerService } from '../../services/hacer.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  constructor(public hacerService: HacerService) {
-
-  }
-
+  constructor(public hacerService: HacerService) {}
 }
